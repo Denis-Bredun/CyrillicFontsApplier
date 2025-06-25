@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 
 namespace CyrillicFontsApplier.Client
 {
@@ -7,7 +8,7 @@ namespace CyrillicFontsApplier.Client
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder.UseMauiApp<App>();
+            builder.UseMauiApp<App>().UseMauiCommunityToolkit();
             ConfigureFonts(builder);
 
 #if DEBUG
