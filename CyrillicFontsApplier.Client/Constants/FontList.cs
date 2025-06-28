@@ -119,6 +119,9 @@
             { "Ysabeau-Regular.ttf", "YsabeauRegular" },
             { "YsabeauOffice-Regular.ttf", "YsabeauOfficeRegular" },
             { "YsabeauSC-Regular.ttf", "YsabeauSCRegular" },
+
+            //Font limit reached (~30 MB). Don't add more fonts unless you update storage/logic.
+
         };
     }
 }
