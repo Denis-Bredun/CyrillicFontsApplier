@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CyrillicFontsApplier.Client.ViewModels"            
+             x:Class="CyrillicFontsApplier.Client.Views.SelectFontView"
+             x:DataType="vm:SelectFontViewModel">
+
+    <Grid RowDefinitions="7*,3*">
+        
+        <CollectionView 
+            ItemsSource="{Binding Fonts}"
+            SelectedItem="{Binding SelectedFont, Mode=TwoWay}"
+            SelectionMode="Single"
+            Margin="10"
+            Grid.Row="0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:FontDisplayInfo">
+                    <Frame Padding="10" Margin="5" BackgroundColor="#f0f0f0" CornerRadius="8">
+                        <Label Text="{Binding Name}" FontFamily="{Binding Value}" FontSize="16"/>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ScrollView Grid.Row="1" Padding="10">
+            <Label 
+                Text="{Binding ExampleText}" 
+                FontFamily="{Binding SelectedFont.Value}"
+                FontSize="18"
+                TextColor="Black" />
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
