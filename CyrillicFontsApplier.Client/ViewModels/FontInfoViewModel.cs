@@ -13,9 +13,9 @@ namespace CyrillicFontsApplier.Client.ViewModels
         [ObservableProperty]
         private bool isFavorite;
 
-        public string DisplayedName { get; set; }
-        public string Alias { get; set; }
-        public string Filename { get; set; }        
+        public string DisplayedName { get; }
+        public string Alias { get; }
+        public string Filename { get; }        
 
         public FontInfoViewModel(string filename)
         {

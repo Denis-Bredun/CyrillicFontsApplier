@@ -6,7 +6,7 @@
              x:DataType="vm:SelectFontViewModel">
 
     <Grid RowDefinitions="7*,3*">
-        
+
         <CollectionView 
             ItemsSource="{Binding Fonts}"
             SelectedItem="{Binding SelectedFont, Mode=TwoWay}"
@@ -14,9 +14,11 @@
             Margin="10"
             Grid.Row="0">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="vm:FontDisplayInfo">
+                <DataTemplate x:DataType="vm:FontInfoViewModel">
                     <Frame Padding="10" Margin="5" BackgroundColor="#f0f0f0" CornerRadius="8">
-                        <Label Text="{Binding Name}" FontFamily="{Binding Value}" FontSize="16"/>
+                        <Label Text="{Binding DisplayedName}" 
+                       FontFamily="{Binding Alias}" 
+                       FontSize="16"/>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -25,7 +27,7 @@
         <ScrollView Grid.Row="1" Padding="10">
             <Label 
                 Text="{Binding ExampleText}" 
-                FontFamily="{Binding SelectedFont.Value}"
+                FontFamily="{Binding SelectedFont.Alias}"
                 FontSize="18"
                 TextColor="Black" />
         </ScrollView>
