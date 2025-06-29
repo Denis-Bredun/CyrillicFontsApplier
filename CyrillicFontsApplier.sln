@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36202.13 d17.14
+VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyrillicFontsApplier.Client", "CyrillicFontsApplier.Client\CyrillicFontsApplier.Client.csproj", "{52833527-73AD-48B8-A892-C0EA6237C3D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyrillicFontsApplier.Tests", "CyrillicFontsApplier.Tests\CyrillicFontsApplier.Tests.csproj", "{4452CC51-675B-43C7-8510-752984111203}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{52833527-73AD-48B8-A892-C0EA6237C3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52833527-73AD-48B8-A892-C0EA6237C3D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52833527-73AD-48B8-A892-C0EA6237C3D2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4452CC51-675B-43C7-8510-752984111203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4452CC51-675B-43C7-8510-752984111203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4452CC51-675B-43C7-8510-752984111203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4452CC51-675B-43C7-8510-752984111203}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
