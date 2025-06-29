@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CyrillicFontsApplier.Client.Constants;
 using System.Collections.ObjectModel;
 
@@ -15,6 +16,12 @@ namespace CyrillicFontsApplier.Client.ViewModels
         public SelectFontViewModel()
         {
             SelectedFont = Fonts.FirstOrDefault();
+        }
+
+        [RelayCommand]
+        public void ChangeFavouriteState(FontInfoViewModel font)
+        {
+            font.IsFavorite = !font.IsFavorite;
         }
     }
 }

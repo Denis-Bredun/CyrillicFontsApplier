@@ -1,4 +1,6 @@
-﻿namespace CyrillicFontsApplier.Client
+﻿using CyrillicFontsApplier.Client.Views;
+
+namespace CyrillicFontsApplier.Client
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new SelectFontView();
         }
     }
 }

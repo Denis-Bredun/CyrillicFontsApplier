@@ -1,36 +1,60 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:CyrillicFontsApplier.Client.ViewModels"            
-             x:Class="CyrillicFontsApplier.Client.Views.SelectFontView"
-             x:DataType="vm:SelectFontViewModel">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:CyrillicFontsApplier.Client.ViewModels"
+    xmlns:converters="clr-namespace:CyrillicFontsApplier.Client.Converters"
+    x:Class="CyrillicFontsApplier.Client.Views.SelectFontView"
+    x:DataType="vm:SelectFontViewModel"
+    BackgroundColor="{StaticResource PageBackgroundColor}">
 
-    <Grid RowDefinitions="7*,3*">
+    <ContentPage.Resources>
+        <converters:FavoriteToImageConverter x:Key="FavoriteToImageConverter" />
+    </ContentPage.Resources>
 
-        <CollectionView 
+    <Grid Style="{StaticResource PageGridStyle}">
+
+        <Grid ColumnDefinitions="*, Auto">
+            <Label
+                Style="{StaticResource HeaderLabelStyle}" 
+                Text="Оберіть шрифт:" />
+            <Button
+                Grid.Column="1" 
+                Style="{StaticResource ExitButtonStyle}" 
+                Text="✕" />
+        </Grid>
+
+        <CollectionView
+            Grid.Row="1"
             ItemsSource="{Binding Fonts}"
             SelectedItem="{Binding SelectedFont, Mode=TwoWay}"
             SelectionMode="Single"
-            Margin="10"
-            Grid.Row="0">
+            VerticalScrollBarVisibility="Always">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:FontInfoViewModel">
-                    <Frame Padding="10" Margin="5" BackgroundColor="#f0f0f0" CornerRadius="8">
-                        <Label Text="{Binding DisplayedName}" 
-                       FontFamily="{Binding Alias}" 
-                       FontSize="16"/>
-                    </Frame>
+                    <Border Style="{StaticResource FontItemBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label
+                                Text="{Binding DisplayedName}"
+                                FontFamily="{Binding Alias}"
+                                Style="{StaticResource FontNameLabelStyle}" />
+                            <ImageButton
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SelectFontViewModel}}, Path=ChangeFavouriteStateCommand}"
+                                CommandParameter="{Binding}"
+                                Source="{Binding IsFavorite, Converter={StaticResource FavoriteToImageConverter}}"
+                                Style="{StaticResource FavoriteImageButtonStyle}" />
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <ScrollView Grid.Row="1" Padding="10">
-            <Label 
-                Text="{Binding ExampleText}" 
+        <Frame Style="{StaticResource ExampleFrameStyle}">
+            <Label
+                Text="{Binding ExampleText}"
                 FontFamily="{Binding SelectedFont.Alias}"
-                FontSize="18"
-                TextColor="Black" />
-        </ScrollView>
+                Style="{StaticResource ExampleLabelStyle}" />
+        </Frame>
 
     </Grid>
 
