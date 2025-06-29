@@ -24,7 +24,7 @@ namespace CyrillicFontsApplier.Client
             {
                 foreach (var font in Constants.FontList.Fonts)
                 {
-                    fonts.AddFont(font.Key, font.Value);
+                    fonts.AddFont(font.Filename, font.Alias);
                 }
             });
         }
