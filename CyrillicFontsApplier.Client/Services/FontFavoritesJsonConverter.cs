@@ -10,7 +10,7 @@ namespace CyrillicFontsApplier.Client.Services
 {
     public class FontFavoritesJsonConverter : IDictionaryToJsonConverter<string, bool>
     {
-        private JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
+        private static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
         {
             AllowTrailingCommas = true,
             WriteIndented = true
