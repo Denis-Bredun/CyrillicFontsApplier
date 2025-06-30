@@ -21,6 +21,7 @@
             <Button
                 Grid.Column="1" 
                 Style="{StaticResource ExitButtonStyle}" 
+                Command="{Binding GoBackToMainPageCommand}"
                 Text="✕" />
         </Grid>
 
@@ -29,6 +30,7 @@
             ItemsSource="{Binding Fonts}"
             SelectedItem="{Binding SelectedFont, Mode=TwoWay}"
             SelectionMode="Single"
+            SelectionChangedCommand="{Binding ApplyFontEverywhereCommand}"
             VerticalScrollBarVisibility="Always">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:FontInfoViewModel">

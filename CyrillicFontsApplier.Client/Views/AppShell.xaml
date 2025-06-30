@@ -6,7 +6,8 @@
     xmlns:pages="clr-namespace:CyrillicFontsApplier.Client.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent ContentTemplate="{DataTemplate pages:SelectFontView}" Route="SelectFontPage"/>
     <ShellContent ContentTemplate="{DataTemplate pages:MainPageView}" Route="MainPage"/>
+    <ShellContent ContentTemplate="{DataTemplate pages:SelectFontView}" Route="SelectFontPage"/>
+    <ShellContent ContentTemplate="{DataTemplate pages:ContactsView}" Route="ContactsPage"/>
 
 </Shell>

@@ -17,7 +17,8 @@ namespace CyrillicFontsApplier.Client
 
             builder.Services
                 .AddAppServices()
-                .AddViewModels();
+                .AddViewModels()
+                .AddPagesWithoutViewModels();
 
             ConfigurePlatformSpecifics();
 
@@ -50,11 +51,13 @@ namespace CyrillicFontsApplier.Client
 
         public static IServiceCollection AddAppServices(this IServiceCollection services)
         {
+            services.AddSingleton<IEventAggregator, EventAggregator>();
+
             services.AddScoped<IPreferenceService<string, string>, PreferenceService>();
             services.AddScoped<IDictionaryToJsonConverter<string, bool>, FontFavoritesJsonConverter>();
             services.AddScoped<IFontFavoriteStatePersistenceService, FontFavoriteStatePersistenceService>();
-
-            services.AddScoped<AppShell>();
+            services.AddScoped<IPageFactory, PageFactory>();
+            services.AddScoped<INavigationService, NavigationService>();
 
             return services;
         }
@@ -63,6 +66,14 @@ namespace CyrillicFontsApplier.Client
         {
             services.AddViewModel<SelectFontViewModel, SelectFontView>();
             services.AddViewModel<MainPageViewModel, MainPageView>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddPagesWithoutViewModels(this IServiceCollection services)
+        {
+            services.AddScoped<ContactsView>();
+            services.AddScoped<AppShell>();
 
             return services;
         }

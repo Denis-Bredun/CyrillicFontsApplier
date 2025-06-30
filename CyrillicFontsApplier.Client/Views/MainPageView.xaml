@@ -7,8 +7,9 @@
              BackgroundColor="{StaticResource PageBackgroundColor}">
 
     <VerticalStackLayout>
-        <Label HorizontalOptions="Center"
-               Text="HomePage"
+        <Button HorizontalOptions="Center"
+               Text="{Binding SelectedFont.DisplayedName}"
+                Command="{Binding GoToSelectFontPageCommand}"
                FontSize="25"/>
     </VerticalStackLayout>
     
