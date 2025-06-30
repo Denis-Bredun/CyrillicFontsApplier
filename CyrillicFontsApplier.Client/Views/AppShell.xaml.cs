@@ -1,4 +1,4 @@
-﻿namespace CyrillicFontsApplier.Client
+﻿namespace CyrillicFontsApplier.Client.Views
 {
     public partial class AppShell : Shell
     {

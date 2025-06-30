@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Maui;
+using CyrillicFontsApplier.Client.Interfaces;
+using CyrillicFontsApplier.Client.Services;
+using CyrillicFontsApplier.Client.ViewModels;
+using CyrillicFontsApplier.Client.Views;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Hosting;
 
 namespace CyrillicFontsApplier.Client
 {
@@ -9,14 +12,29 @@ namespace CyrillicFontsApplier.Client
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder.UseMauiApp<App>().UseMauiCommunityToolkit();
+
+            ConfigureAppEssentials(builder);
+
+            builder.Services
+                .AddAppServices()
+                .AddViewModels();
+
+            ConfigurePlatformSpecifics();
+
+            return builder.Build();
+        }
+
+        private static void ConfigureAppEssentials(MauiAppBuilder builder)
+        {
+            builder
+                .UseMauiApp<App>()
+                .UseMauiCommunityToolkit();
+
             ConfigureFonts(builder);
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
-            return builder.Build();
         }
 
         private static void ConfigureFonts(MauiAppBuilder builder)
@@ -29,5 +47,49 @@ namespace CyrillicFontsApplier.Client
                 }
             });
         }
+
+        public static IServiceCollection AddAppServices(this IServiceCollection services)
+        {
+            services.AddScoped<IPreferenceService<string, string>, PreferenceService>();
+            services.AddScoped<IDictionaryToJsonConverter<string, bool>, FontFavoritesJsonConverter>();
+            services.AddScoped<IFontFavoriteStatePersistenceService, FontFavoriteStatePersistenceService>();
+
+            services.AddScoped<AppShell>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddViewModels(this IServiceCollection services)
+        {
+            services.AddViewModel<SelectFontViewModel, SelectFontView>();
+            services.AddViewModel<MainPageViewModel, MainPageView>();
+
+            return services;
+        }
+
+        public static void AddViewModel<TViewModel, TView>(this IServiceCollection services)
+            where TView : ContentPage, new()
+            where TViewModel : class
+        {
+            services.AddSingleton<TViewModel>();
+            services.AddScoped<TView>(s => new TView { BindingContext = s.GetRequiredService<TViewModel>() });
+        }
+
+        private static void ConfigurePlatformSpecifics()
+        {
+#if ANDROID
+            Microsoft.Maui.Handlers.ScrollViewHandler.Mapper.ModifyMapping("HorizontalScrollBarVisibility", (handler, view, args) =>
+            {
+                handler.PlatformView.HorizontalScrollBarEnabled = true;
+                handler.PlatformView.ScrollBarFadeDuration = 0;
+            });
+
+            Microsoft.Maui.Handlers.ScrollViewHandler.Mapper.ModifyMapping("VerticalScrollBarVisibility", (handler, view, args) =>
+            {
+                handler.PlatformView.VerticalScrollBarEnabled = true;
+                handler.PlatformView.ScrollBarFadeDuration = 0;
+            });
+#endif
+        }        
     }
 }

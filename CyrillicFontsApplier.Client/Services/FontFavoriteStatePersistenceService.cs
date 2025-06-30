@@ -9,10 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CyrillicFontsApplier.Client.Services
-{
+{  
     public class FontFavoriteStatePersistenceService(
-        IPreferenceService<string, string> preferences,
-        IDictionaryToJsonConverter<string, bool> converter)
+            IPreferenceService<string, string> preferences,
+            IDictionaryToJsonConverter<string, bool> converter) : IFontFavoriteStatePersistenceService
     {
         private const string PreferencesKey = "FontFavourite";
         private const string DefaultValue = "{}";

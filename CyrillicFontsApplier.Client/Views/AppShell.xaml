@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="CyrillicFontsApplier.Client.Views.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:CyrillicFontsApplier.Client.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent ContentTemplate="{DataTemplate pages:SelectFontView}" Route="SelectFontPage"/>
+    <ShellContent ContentTemplate="{DataTemplate pages:MainPageView}" Route="MainPage"/>
+
+</Shell>
