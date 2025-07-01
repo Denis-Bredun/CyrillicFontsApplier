@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Style x:Key="PageGridStyle" TargetType="Grid">
+    <Style x:Key="SelectFontPageGridStyle" TargetType="Grid">
         <Setter Property="Padding" Value="{StaticResource GridPadding}" />
         <Setter Property="RowSpacing" Value="{StaticResource GridRowSpacing}" />
         <Setter Property="RowDefinitions">
@@ -22,6 +22,21 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </ColumnDefinitionCollection>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MainPageGridStyle" TargetType="Grid">
+        <Setter Property="Padding" Value="{StaticResource GridPadding}" />
+        <Setter Property="RowSpacing" Value="{StaticResource GridRowSpacing}" />
+        <Setter Property="RowDefinitions">
+            <Setter.Value>
+                <RowDefinitionCollection>
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.4*" />
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="0.4*" />
+                </RowDefinitionCollection>
             </Setter.Value>
         </Setter>
     </Style>
@@ -46,7 +61,6 @@
 
     <Style x:Key="FontItemBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="{StaticResource BorderMargin}" />
-        <Setter Property="Padding" Value="{StaticResource BorderPadding}" />
         <Setter Property="BackgroundColor" Value="{StaticResource ItemBackgroundColor}" />
         <Setter Property="StrokeShape">
             <Setter.Value>

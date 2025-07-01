@@ -12,7 +12,7 @@
         <converters:FavoriteToImageConverter x:Key="FavoriteToImageConverter" />
     </ContentPage.Resources>
 
-    <Grid Style="{StaticResource PageGridStyle}">
+    <Grid Style="{StaticResource SelectFontPageGridStyle}">
 
         <Grid ColumnDefinitions="*, Auto">
             <Label
@@ -34,7 +34,7 @@
             VerticalScrollBarVisibility="Always">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:FontInfoViewModel">
-                    <Border Style="{StaticResource FontItemBorderStyle}">
+                    <Border Style="{StaticResource FontItemBorderStyle}" Padding="{StaticResource BorderPadding}">
                         <Grid ColumnDefinitions="*, Auto">
                             <Label
                                 Text="{Binding DisplayedName}"

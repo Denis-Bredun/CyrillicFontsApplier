@@ -2,15 +2,62 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:CyrillicFontsApplier.Client.ViewModels"
+             xmlns:converters="clr-namespace:CyrillicFontsApplier.Client.Converters"
              x:Class="CyrillicFontsApplier.Client.Views.MainPageView"
              x:DataType="vm:MainPageViewModel"
              BackgroundColor="{StaticResource PageBackgroundColor}">
 
-    <VerticalStackLayout>
-        <Button HorizontalOptions="Center"
-               Text="{Binding SelectedFont.DisplayedName}"
-                Command="{Binding GoToSelectFontPageCommand}"
-               FontSize="25"/>
-    </VerticalStackLayout>
+
+    <ContentPage.Resources>
+        <converters:FavoriteToImageConverter x:Key="FavoriteToImageConverter" />
+    </ContentPage.Resources>
+
+    <Grid Style="{StaticResource MainPageGridStyle}">
+        <Border Style="{StaticResource FontItemBorderStyle}">
+            <Button
+            Text="{Binding SelectedFont.DisplayedName}"
+            Command="{Binding GoToSelectFontPageCommand}"
+            FontSize="30"
+            TextColor="Black"
+            BackgroundColor="{StaticResource ItemBackgroundColor}"/>
+        </Border>
+        <Border Grid.Row="1" Style="{StaticResource FontItemBorderStyle}">
+            <Editor
+                FontSize="25"
+                FontFamily="{Binding SelectedFont.Alias}"/>
+        </Border>
+        <Border Grid.Row="2" Style="{StaticResource FontItemBorderStyle}">
+            <Button
+    Text="Download"
+    FontSize="30"
+    TextColor="Black"
+    BackgroundColor="{StaticResource ItemBackgroundColor}"/>
+        </Border>
+
+        <CollectionView
+    Grid.Row="3"
+    ItemsSource="{Binding FavouriteFonts}"
+    SelectedItem="{Binding SelectedFont, Mode=TwoWay}"
+    SelectionMode="Single"
+    VerticalScrollBarVisibility="Always">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:FontInfoViewModel">
+                    <Border Style="{StaticResource FontItemBorderStyle}" Padding="{StaticResource BorderPadding}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label
+                        Text="{Binding DisplayedName}"
+                        FontFamily="{Binding Alias}"
+                        Style="{StaticResource FontNameLabelStyle}" />
+                            <ImageButton
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=ChangeFavouriteStateCommand}"
+                        CommandParameter="{Binding}"
+                        Source="{Binding IsFavorite, Converter={StaticResource FavoriteToImageConverter}}"
+                        Style="{StaticResource FavoriteImageButtonStyle}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
     
 </ContentPage>

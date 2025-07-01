@@ -4,13 +4,8 @@ using CyrillicFontsApplier.Client.Constants;
 using CyrillicFontsApplier.Client.Enums;
 using CyrillicFontsApplier.Client.Events;
 using CyrillicFontsApplier.Client.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CyrillicFontsApplier.Client.ViewModels
 {
@@ -71,6 +66,12 @@ namespace CyrillicFontsApplier.Client.ViewModels
         public async Task GoToSelectFontPage()
         {
             await _navigationService.NavigateTo(PageType.SelectFontPage);
+        }
+
+        [RelayCommand]
+        public void ChangeFavouriteState(FontInfoViewModel font)
+        {
+            font.IsFavorite = !font.IsFavorite;
         }
 
         private void OnFontSelected(FontInfoViewModel font)
